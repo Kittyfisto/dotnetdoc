@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc", "dotnetdoc\dotnetdoc.csproj", "{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.Test", "dotnetdoc.Test\dotnetdoc.Test.csproj", "{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7916A87-197D-407C-A223-0F4C3EF89BBD}
+	EndGlobalSection
+EndGlobal
