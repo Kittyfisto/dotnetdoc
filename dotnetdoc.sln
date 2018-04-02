@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.Test", "dotnetdoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.doc", "dotnetdoc.doc\dotnetdoc.doc.csproj", "{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.TestTypes", "dotnetdoc.TestTypes\dotnetdoc.TestTypes.csproj", "{40E49336-7330-41C3-9DC0-F33B52560EDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E49336-7330-41C3-9DC0-F33B52560EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E49336-7330-41C3-9DC0-F33B52560EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E49336-7330-41C3-9DC0-F33B52560EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E49336-7330-41C3-9DC0-F33B52560EDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
