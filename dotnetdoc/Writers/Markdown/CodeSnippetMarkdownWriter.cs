@@ -3,7 +3,9 @@
 namespace dotnetdoc.Writers.Markdown
 {
 	internal sealed class CodeSnippetMarkdownWriter
-		: StringWriter, ICodeSnippetWriter
+		: StringWriter
+		, ICodeSnippetWriter
+		, IMarkdownWriter
 	{
 		private readonly string _language;
 
@@ -12,11 +14,11 @@ namespace dotnetdoc.Writers.Markdown
 			_language = language;
 		}
 
-		public void RenderTo(TextWriter textWriter)
+		public void WriteTo(TextWriter writer)
 		{
-			textWriter.WriteLine("```{0}", _language);
-			textWriter.Write(ToString());
-			textWriter.WriteLine("```");
+			writer.WriteLine("```{0}", _language);
+			writer.Write(ToString());
+			writer.WriteLine("```");
 		}
 	}
 }

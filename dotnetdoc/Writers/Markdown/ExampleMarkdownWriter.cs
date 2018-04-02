@@ -9,15 +9,15 @@ namespace dotnetdoc.Writers.Markdown
 		, IMarkdownWriter
 	{
 		private readonly string _name;
-		private readonly List<ICodeSnippetWriter> _subWriters;
+		private readonly List<IMarkdownWriter> _subWriters;
 
 		public ExampleMarkdownWriter(string name)
 		{
 			_name = name;
-			_subWriters = new List<ICodeSnippetWriter>();
+			_subWriters = new List<IMarkdownWriter>();
 		}
 
-		public ICodeSnippetWriter AddCodeSnippet(string language)
+		public TextWriter AddCodeSnippet(string language)
 		{
 			var writer =  new CodeSnippetMarkdownWriter(language);
 			_subWriters.Add(writer);
@@ -29,14 +29,14 @@ namespace dotnetdoc.Writers.Markdown
 			_subWriters.Add(new MarkdownImageWriter(description, relativePath));
 		}
 
-		public void RenderTo(TextWriter textWriter)
+		public void WriteTo(TextWriter textWriter)
 		{
 			textWriter.WriteLine("### {0}", _name);
 			textWriter.WriteLine();
 
 			foreach (var subWriter in _subWriters)
 			{
-				subWriter.RenderTo(textWriter);
+				subWriter.WriteTo(textWriter);
 			}
 
 			if (_subWriters.Any())

@@ -56,28 +56,21 @@ namespace dotnetdoc.Creators
 
 		public Type Type => typeof(T);
 
-		public void RenderTo(ITypeDocumentationWriter writer)
+		public void RenderTo(IFilesystem filesystem, string path, ITypeDocumentationWriter writer)
 		{
 			foreach (var example in _examples)
 			{
-				var elementName = typeof(T).Name;
-				var documentationFolder = Path.Combine(basePath, DocumentationFolderName, elementName);
-
 				foreach (var pair in _snapshots)
 				{
 					var relativeImagePath = pair.Key;
 					var bitmap = pair.Value;
 
-					var destination = Path.Combine(basePath, documentationFolder, relativeImagePath);
+					var destination = Path.Combine(path, relativeImagePath);
 					SaveSnapshot(bitmap, destination);
 				}
 
-				var dest = Path.Combine(documentationFolder, "README.md");
-				using (var fileStream = File.Open(dest, FileMode.Create))
-				using (var streamWriter = new StreamWriter(fileStream))
-				{
-					_documentationMarkdownWriter.WriteTo(streamWriter);
-				}
+				var exampleWriter = writer.AddExample(example.Name);
+				example.RenderTo(exampleWriter);
 			}
 		}
 

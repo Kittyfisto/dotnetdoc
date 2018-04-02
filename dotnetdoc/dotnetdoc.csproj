@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\dotnetdoc.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\dotnetdoc.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -54,8 +58,8 @@
     <Compile Include="Creators\CodeSnippetCreator.cs" />
     <Compile Include="EmptyAssemblyDocumentationReader.cs" />
     <Compile Include="IAssemblyDocumentationReader.cs" />
-    <Compile Include="Creators\ICodeSnippetCreator.cs" />
-    <Compile Include="Creators\ITypeExampleCreator.cs" />
+    <Compile Include="ICodeSnippetCreator.cs" />
+    <Compile Include="ITypeExampleCreator.cs" />
     <Compile Include="RenderingSettings.cs" />
     <Compile Include="Writers\Markdown\CodeSnippetMarkdownWriter.cs" />
     <Compile Include="Creators\ControlDocumentationCreator.cs" />
@@ -66,8 +70,8 @@
     <Compile Include="Creators\AssemblyDocumentationCreator.cs" />
     <Compile Include="Writers\Markdown\ExampleMarkdownWriter.cs" />
     <Compile Include="Creators\FrameworkElementExampleCreator.cs" />
-    <Compile Include="Creators\IControlDocumentationCreator.cs" />
-    <Compile Include="Creators\IFrameworkElementExampleCreator.cs" />
+    <Compile Include="IControlDocumentationCreator.cs" />
+    <Compile Include="IFrameworkElementExampleCreator.cs" />
     <Compile Include="Writers\Markdown\MarkdownImageWriter.cs" />
     <Compile Include="Creators\ITypeDocumentationCreator.cs" />
     <Compile Include="Writers\Markdown\TypeDocumentationMarkdownWriter.cs" />

@@ -43,7 +43,7 @@ namespace dotnetdoc.Writers.Markdown
 
 			foreach (var subWriter in _subWriters)
 			{
-				subWriter.RenderTo(textWriter);
+				subWriter.WriteTo(textWriter);
 			}
 
 			if (_typeDocumentation != null)

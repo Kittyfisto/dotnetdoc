@@ -1,8 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Linq.Expressions;
+using System.Reflection;
+using dotnetdoc.Creators;
+using dotnetdoc.Writers;
 
-namespace dotnetdoc.Creators
+namespace dotnetdoc
 {
 	/// <summary>
 	/// 
@@ -18,8 +20,14 @@ namespace dotnetdoc.Creators
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="method"></param>
+		void AddFromMethod(MethodInfo method);
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="writer"></param>
-		void RenderTo(TextWriter writer);
+		void RenderTo(IExampleWriter writer);
 	}
 
 	/// <summary>
@@ -29,11 +37,5 @@ namespace dotnetdoc.Creators
 	public interface ICodeSnippetCreator<out T>
 		: ICodeSnippetCreator
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="type"></param>
-		/// <param name="mainName"></param>
-		void AddFromMethod(Type type, string mainName);
 	}
 }

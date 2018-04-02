@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using dotnetdoc.Writers;
 
 namespace dotnetdoc.Creators
@@ -24,11 +26,14 @@ namespace dotnetdoc.Creators
 			return creator;
 		}
 
-		public void RenderTo(ITypeDocumentationWriter writer)
+		public Type Type => typeof(T);
+
+		public void RenderTo(IFilesystem filesystem, string path, ITypeDocumentationWriter writer)
 		{
 			foreach (var creator in _creators)
 			{
-				creator.RenderTo(getCurrentDirectory);
+				var exampleWriter = writer.AddExample(creator.Name);
+				creator.RenderTo(exampleWriter);
 			}
 		}
 	}

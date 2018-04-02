@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using dotnetdoc.Writers;
 
 namespace dotnetdoc.Creators
 {
 	internal sealed class TypeExampleCreator<T>
 		: ITypeExampleCreator<T>
 	{
+		private readonly string _name;
 		private readonly List<ICodeSnippetCreator> _creators;
 
 		public TypeExampleCreator(string name, string description)
 		{
+			_name = name;
 			_creators = new List<ICodeSnippetCreator>();
 		}
 
@@ -32,9 +35,14 @@ namespace dotnetdoc.Creators
 			
 		}
 
-		public void RenderTo(string getCurrentDirectory)
+		public void RenderTo(IExampleWriter writer)
 		{
-			foreach (var creator in _creators) creator.RenderTo(getCurrentDirectory);
+			foreach (var creator in _creators)
+			{
+				creator.RenderTo(writer);
+			}
 		}
+
+		public string Name => _name;
 	}
 }

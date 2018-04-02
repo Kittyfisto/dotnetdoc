@@ -8,6 +8,6 @@ namespace dotnetdoc.Writers.Markdown
 		/// 
 		/// </summary>
 		/// <param name="writer"></param>
-		void RenderTo(TextWriter writer);
+		void WriteTo(TextWriter writer);
 	}
 }

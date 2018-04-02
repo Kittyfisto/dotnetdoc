@@ -1,23 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Linq.Expressions;
-using dotnetdoc.Writers.Markdown;
+using System.Reflection;
+using dotnetdoc.Writers;
 
 namespace dotnetdoc.Creators
 {
 	internal sealed class CodeSnippetCreator<T>
 		: ICodeSnippetCreator<T>
 	{
-		private readonly CodeSnippetMarkdownWriter _writer;
+		private readonly TextWriter _writer;
 
 		public CodeSnippetCreator()
 		{
-			_writer = new CodeSnippetMarkdownWriter("C#");
-		}
-
-		public void AddFromMethod(Type type, string mainName)
-		{
-			throw new NotImplementedException();
+			_writer = new StringWriter();
 		}
 
 		/// <summary>
@@ -29,9 +25,14 @@ namespace dotnetdoc.Creators
 			_writer.WriteLine(func.ToString());
 		}
 
-		public void RenderTo(TextWriter writer)
+		public void AddFromMethod(MethodInfo method)
 		{
-			_writer.RenderTo(writer);
+			throw new NotImplementedException();
+		}
+
+		public void RenderTo(IExampleWriter writer)
+		{
+			writer.AddCodeSnippet("C#").WriteLine(_writer);
 		}
 	}
 }

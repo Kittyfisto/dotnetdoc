@@ -23,11 +23,21 @@ namespace dotnetdoc.Creators
 		private readonly ResourceDictionary _resourceDictionary;
 		private readonly List<ITypeDocumentationCreator> _types;
 
+		/// <summary>
+		/// Initializes this class.
+		/// </summary>
+		/// <param name="assembly"></param>
 		public AssemblyDocumentationCreator(Assembly assembly)
 			: this(assembly, null, null)
 		{
 		}
 
+		/// <summary>
+		/// Initializes this class.
+		/// </summary>
+		/// <param name="assembly"></param>
+		/// <param name="dispatcher"></param>
+		/// <param name="resourceDictionary"></param>
 		public AssemblyDocumentationCreator(Assembly assembly, Dispatcher dispatcher, ResourceDictionary resourceDictionary)
 		{
 			if (assembly == null)
@@ -72,7 +82,7 @@ namespace dotnetdoc.Creators
 		/// <returns></returns>
 		public IControlDocumentationCreator<T> CreateDocumentationForFrameworkElement<T>() where T : FrameworkElement, new()
 		{
-			var creator = new ControlDocumentationCreator<T>(_dispatcher, _resourceDictionary, _assemblyDocumentationReader);
+			var creator = new ControlDocumentationCreator<T>(_dispatcher, _resourceDictionary);
 			_types.Add(creator);
 			return creator;
 		}
@@ -102,7 +112,10 @@ namespace dotnetdoc.Creators
 			foreach (var typeCreator in _types)
 			{
 				var documentationWriter = new TypeDocumentationMarkdownWriter(_assemblyDocumentationReader, typeCreator.Type);
-				typeCreator.RenderTo(documentationWriter);
+				
+				var directory = Path.Combine(basePath, typeCreator.Type.FullName);
+				var fileName = Path.Combine(directory, "README.md");
+				typeCreator.RenderTo(filesystem, directory, documentationWriter);
 
 				using (var stream = new MemoryStream())
 				using (var streamWriter = new StreamWriter(stream))
@@ -111,7 +124,6 @@ namespace dotnetdoc.Creators
 					streamWriter.Flush();
 
 					stream.Position = 0;
-					var fileName = Path.Combine(basePath, string.Format("{0}.md", typeCreator.Type.FullName));
 					tasks.Add(WriteDocumentationTo(filesystem, fileName, stream));
 				}
 			}

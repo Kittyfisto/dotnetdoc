@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using dotnetdoc.Writers;
-using dotnetdoc.Writers.Markdown;
 
 namespace dotnetdoc.Creators
 {
@@ -9,9 +9,21 @@ namespace dotnetdoc.Creators
 	/// </summary>
 	public interface ITypeDocumentationCreator
 	{
+		/// <summary>
+		///     The .NET type for which documentation is being created.
+		/// </summary>
 		Type Type { get; }
 
-		void RenderTo(ITypeDocumentationWriter writer);
+		/// <summary>
+		///     Renders the contents of this creator to the given writer.
+		/// </summary>
+		/// <remarks>
+		///     Supplementary resources (such as images) will be placed in <paramref name="path" />.
+		/// </remarks>
+		/// <param name="filesystem"></param>
+		/// <param name="path"></param>
+		/// <param name="writer"></param>
+		void RenderTo(IFilesystem filesystem, string path, ITypeDocumentationWriter writer);
 	}
 
 	/// <summary>
@@ -21,7 +33,6 @@ namespace dotnetdoc.Creators
 		: ITypeDocumentationCreator
 	{
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="name"></param>
 		/// <param name="description"></param>

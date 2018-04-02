@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -6,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using dotnetdoc.Writers.Markdown;
+using dotnetdoc.Writers;
 
 namespace dotnetdoc.Creators
 {
@@ -22,8 +23,8 @@ namespace dotnetdoc.Creators
 		private readonly Dispatcher _dispatcher;
 		private readonly T _element;
 		private readonly string _exampleName;
-		private readonly CodeSnippetMarkdownWriter _codeSnippetMarkdown;
 		private readonly string _controlName;
+		private readonly Dictionary<DependencyProperty, object> _values;
 
 		public FrameworkElementExampleCreator(ControlDocumentationCreator<T> controlDocumentationCreator,
 		                             Dispatcher dispatcher,
@@ -45,28 +46,17 @@ namespace dotnetdoc.Creators
 			});
 
 			_controlName = typeof(T).Name;
-			var xamlNamespace = typeof(T).Assembly.GetName().Name;
-
-			_codeSnippetMarkdown = writer.AddCodeSnippet("xaml");
-			_codeSnippetMarkdown.Write("<{0}:{1} ", xamlNamespace, _controlName);
+			_values = new Dictionary<DependencyProperty, object>();
 		}
 
 		public void Dispose()
 		{
-			_codeSnippetMarkdown.WriteLine("/>");
-
-			_dispatcher.Invoke(() =>
-			{
-				var screenshot = CaptureScreenshot(_element);
-				var relativeImagePath = _controlDocumentationCreator.AddImage(screenshot, _exampleName);
-				_writer.AddImage(string.Format("Image of {0}, {1}", _controlName, _exampleName), relativeImagePath);
-			}, DispatcherPriority.Background);
 		}
 
 		public void SetValue(DependencyProperty property, object value)
 		{
 			Invoke(() => { _element.SetValue(property, value); });
-			_codeSnippetMarkdown.Write("{0}=\"{1}\" ", property.Name, value);
+			_values[property] = value;
 		}
 
 		public void Resize(int width, int height)
@@ -157,5 +147,35 @@ namespace dotnetdoc.Creators
 			Invoke(() => { result = func(); });
 			return result;
 		}
+
+		public void AddCodeSnippetFromMethod(MethodInfo method)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RenderTo(IExampleWriter writer)
+		{
+			var codeSnippetWriter = writer.AddCodeSnippet("xaml");
+			var xamlNamespace = typeof(T).Assembly.GetName().Name;
+			codeSnippetWriter.Write("<{0}:{1} ", xamlNamespace, _controlName);
+
+			foreach (var pair in _values)
+			{
+				var property = pair.Key;
+				var value = pair.Value;
+				codeSnippetWriter.Write("{0}=\"{1}\" ", property.Name, value);
+			}
+
+			codeSnippetWriter.WriteLine("/>");
+
+			_dispatcher.Invoke(() =>
+			{
+				var screenshot = CaptureScreenshot(_element);
+				var relativeImagePath = _controlDocumentationCreator.AddImage(screenshot, _exampleName);
+				writer.AddImage(string.Format("Image of {0}, {1}", _controlName, _exampleName), relativeImagePath);
+			}, DispatcherPriority.Background);
+		}
+
+		public string Name => _exampleName;
 	}
 }

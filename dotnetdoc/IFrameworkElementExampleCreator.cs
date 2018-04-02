@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace dotnetdoc.Creators
+namespace dotnetdoc
 {
 	/// <summary>
 	///     Responsible for creating example code to show how a particular <see cref="FrameworkElement"/> is to be used.

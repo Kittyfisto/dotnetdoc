@@ -14,7 +14,7 @@ namespace dotnetdoc.Writers.Markdown
 			_relativeImagePath = relativeImagePath;
 		}
 
-		public void RenderTo(TextWriter textWriter)
+		public void WriteTo(TextWriter textWriter)
 		{
 			textWriter.WriteLine("![{0}]({1})", _description, _relativeImagePath);
 		}

@@ -13,10 +13,29 @@ namespace dotnetdoc
 		: MemberDocumentation
 	{
 		private readonly List<PropertyDocumentation> _properties;
+
+		/// <summary>
+		///     The full type name of the type being documented.
+		/// </summary>
 		public readonly string FullTypeName;
+
+		/// <summary>
+		///     The properties of the type.
+		/// </summary>
 		public readonly IReadOnlyList<PropertyDocumentation> Properties;
+
+		/// <summary>
+		///     The type being documented.
+		/// </summary>
 		public readonly Type Type;
 
+		/// <summary>
+		///     Initializes this class.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="fullTypeName"></param>
+		/// <param name="summary"></param>
+		/// <param name="remarks"></param>
 		public TypeDocumentation(Type type, string fullTypeName, string summary, IReadOnlyList<string> remarks) :
 			base(summary, remarks)
 		{
@@ -25,6 +44,12 @@ namespace dotnetdoc
 			Properties = _properties = new List<PropertyDocumentation>();
 		}
 
+		/// <summary>
+		///     Creates a new <see cref="TypeDocumentation" /> from the given element.
+		/// </summary>
+		/// <param name="member"></param>
+		/// <param name="assembly"></param>
+		/// <returns></returns>
 		public static TypeDocumentation CreateFrom(XElement member, Assembly assembly)
 		{
 			var fullTypeName = member.Attribute("name").Value.Substring(startIndex: 2);
@@ -32,6 +57,10 @@ namespace dotnetdoc
 			return new TypeDocumentation(type, fullTypeName, GetSummary(member), GetRemarks(member));
 		}
 
+		/// <summary>
+		///     Adds the given property to this type's documentation.
+		/// </summary>
+		/// <param name="property"></param>
 		public void Add(PropertyDocumentation property)
 		{
 			_properties.Add(property);

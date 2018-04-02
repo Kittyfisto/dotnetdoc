@@ -22,6 +22,10 @@ namespace dotnetdoc
 		private readonly Dictionary<Type, TypeDocumentation> _typeDocumenstationsByType;
 		private readonly Dictionary<string, TypeDocumentation> _typeDocumenstationsByName;
 
+		/// <summary>
+		/// Initializes this class.
+		/// </summary>
+		/// <param name="assembly"></param>
 		public AssemblyDocumentationReader(Assembly assembly)
 		{
 			_assembly = assembly;
@@ -72,12 +76,14 @@ namespace dotnetdoc
 			}
 		}
 
+		/// <inheritdoc />
 		public TypeDocumentation GetDocumentationOf(Type type)
 		{
 			_typeDocumenstationsByType.TryGetValue(type, out var documentation);
 			return documentation;
 		}
 
+		/// <inheritdoc />
 		public TypeDocumentation GetDocumentationOf<T>()
 		{
 			return GetDocumentationOf(typeof(T));

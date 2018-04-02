@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using dotnetdoc.Creators;
 
-namespace dotnetdoc.Creators
+namespace dotnetdoc
 {
 	/// <summary>
 	///     Responsible for creating the documentation for a particular <see cref="FrameworkElement" />.
@@ -11,7 +12,7 @@ namespace dotnetdoc.Creators
 		where T : FrameworkElement
 	{
 		/// <summary>
-		///     Adds a new example which shows how to use the <see cref="T"/> <see cref="FrameworkElement"/>.
+		///     Adds a new example which shows how to use the <typeparamref name="T"/> <see cref="FrameworkElement"/>.
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
