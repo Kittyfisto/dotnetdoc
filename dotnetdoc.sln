@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc", "dotnetdoc\dotn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.Test", "dotnetdoc.Test\dotnetdoc.Test.csproj", "{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.doc", "dotnetdoc.doc\dotnetdoc.doc.csproj", "{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

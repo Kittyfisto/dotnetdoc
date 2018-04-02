@@ -6,41 +6,36 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using dotnetdoc.Writers;
 
-namespace dotnetdoc
+namespace dotnetdoc.Creators
 {
 	/// <summary>
 	///     Responsible for providing the documentation for a particular control.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class ControlDocumentationCreator<T>
+	internal sealed class ControlDocumentationCreator<T>
 		: IControlDocumentationCreator<T>
 		where T : FrameworkElement, new()
 	{
+		private const string DocumentationFolderName = "Documentation";
 		private readonly Dispatcher _dispatcher;
+		private readonly List<ITypeExampleCreator> _examples;
 		private readonly ResourceDictionary _resourceDictionary;
 		private readonly Dictionary<string, BitmapSource> _snapshots;
-		private readonly ControlDocumentationWriter<T> _documentationWriter;
-		private readonly string _basePath;
-		private const string DocumentationFolderName = "Documentation";
 
 		public ControlDocumentationCreator(Dispatcher dispatcher,
-		                                   ResourceDictionary resourceDictionary,
-		                                   AssemblyDocumentationReader assemblyDocumentationReader,
-		                                   string basePath)
+			ResourceDictionary resourceDictionary)
 		{
 			if (dispatcher == null)
 				throw new ArgumentNullException(nameof(dispatcher));
 			if (resourceDictionary == null)
 				throw new ArgumentNullException(nameof(resourceDictionary));
-			if (assemblyDocumentationReader == null)
-				throw new ArgumentNullException(nameof(assemblyDocumentationReader));
 
 			_dispatcher = dispatcher;
 			_resourceDictionary = resourceDictionary;
-			_basePath = basePath;
 			_snapshots = new Dictionary<string, BitmapSource>();
-			_documentationWriter = new ControlDocumentationWriter<T>(assemblyDocumentationReader);
+			_examples = new List<ITypeExampleCreator>();
 		}
 
 		[Pure]
@@ -49,29 +44,40 @@ namespace dotnetdoc
 			if (name == null)
 				throw new ArgumentNullException(nameof(name));
 
-			var exampleWriter = _documentationWriter.AddExample(name);
-			return new FrameworkElementExampleCreator<T>(this, _dispatcher, _resourceDictionary, exampleWriter, name);
+			var exampleCreator = new FrameworkElementExampleCreator<T>(this, _dispatcher, _resourceDictionary, name);
+			_examples.Add(exampleCreator);
+			return exampleCreator;
 		}
 
-		public void Dispose()
+		public ITypeExampleCreator<T> AddExample(string name, string description)
 		{
-			var elementName = typeof(T).Name;
-			var documentationFolder = Path.Combine(_basePath, DocumentationFolderName, elementName);
+			throw new NotImplementedException();
+		}
 
-			foreach (var pair in _snapshots)
+		public Type Type => typeof(T);
+
+		public void RenderTo(ITypeDocumentationWriter writer)
+		{
+			foreach (var example in _examples)
 			{
-				var relativeImagePath = pair.Key;
-				var bitmap = pair.Value;
+				var elementName = typeof(T).Name;
+				var documentationFolder = Path.Combine(basePath, DocumentationFolderName, elementName);
 
-				var destination = Path.Combine(_basePath, documentationFolder, relativeImagePath);
-				SaveSnapshot(bitmap, destination);
-			}
+				foreach (var pair in _snapshots)
+				{
+					var relativeImagePath = pair.Key;
+					var bitmap = pair.Value;
 
-			var dest = Path.Combine(documentationFolder, "README.md");
-			using (var fileStream = File.Open(dest, FileMode.Create))
-			using (var streamWriter = new StreamWriter(fileStream))
-			{
-				_documentationWriter.WriteTo(streamWriter);
+					var destination = Path.Combine(basePath, documentationFolder, relativeImagePath);
+					SaveSnapshot(bitmap, destination);
+				}
+
+				var dest = Path.Combine(documentationFolder, "README.md");
+				using (var fileStream = File.Open(dest, FileMode.Create))
+				using (var streamWriter = new StreamWriter(fileStream))
+				{
+					_documentationMarkdownWriter.WriteTo(streamWriter);
+				}
 			}
 		}
 
@@ -102,10 +108,7 @@ namespace dotnetdoc
 				'\r',
 				'\n'
 			};
-			foreach (var invalidCharacter in invalidChars)
-			{
-				builder.Replace(invalidCharacter, '_');
-			}
+			foreach (var invalidCharacter in invalidChars) builder.Replace(invalidCharacter, '_');
 			return builder.ToString();
 		}
 

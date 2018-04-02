@@ -6,33 +6,32 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using dotnetdoc.Writers.Markdown;
 
-namespace dotnetdoc
+namespace dotnetdoc.Creators
 {
 	/// <summary>
 	///     Responsible for creating the documentation for a particular control in a particular example.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	internal sealed class FrameworkElementExampleCreator<T>
-		: IFrameworkElementExampleCreator<T> where T : FrameworkElement, new()
+		: IFrameworkElementExampleCreator<T>
+		where T : FrameworkElement, new()
 	{
 		private readonly ControlDocumentationCreator<T> _controlDocumentationCreator;
 		private readonly Dispatcher _dispatcher;
-		private readonly ExampleWriter _writer;
 		private readonly T _element;
 		private readonly string _exampleName;
-		private readonly CodeSnippetWriter _codeSnippet;
+		private readonly CodeSnippetMarkdownWriter _codeSnippetMarkdown;
 		private readonly string _controlName;
 
 		public FrameworkElementExampleCreator(ControlDocumentationCreator<T> controlDocumentationCreator,
 		                             Dispatcher dispatcher,
 		                             ResourceDictionary resourceDictionary,
-		                             ExampleWriter writer,
 		                             string exampleName)
 		{
 			_controlDocumentationCreator = controlDocumentationCreator;
 			_dispatcher = dispatcher;
-			_writer = writer;
 			_exampleName = exampleName;
 			_element = Invoke(() =>
 			{
@@ -48,13 +47,13 @@ namespace dotnetdoc
 			_controlName = typeof(T).Name;
 			var xamlNamespace = typeof(T).Assembly.GetName().Name;
 
-			_codeSnippet = writer.AddCodeSnippet("xaml");
-			_codeSnippet.Write("<{0}:{1} ", xamlNamespace, _controlName);
+			_codeSnippetMarkdown = writer.AddCodeSnippet("xaml");
+			_codeSnippetMarkdown.Write("<{0}:{1} ", xamlNamespace, _controlName);
 		}
 
 		public void Dispose()
 		{
-			_codeSnippet.WriteLine("/>");
+			_codeSnippetMarkdown.WriteLine("/>");
 
 			_dispatcher.Invoke(() =>
 			{
@@ -67,7 +66,7 @@ namespace dotnetdoc
 		public void SetValue(DependencyProperty property, object value)
 		{
 			Invoke(() => { _element.SetValue(property, value); });
-			_codeSnippet.Write("{0}=\"{1}\" ", property.Name, value);
+			_codeSnippetMarkdown.Write("{0}=\"{1}\" ", property.Name, value);
 		}
 
 		public void Resize(int width, int height)

@@ -1,20 +1,20 @@
 ﻿using System.IO;
 
-namespace dotnetdoc
+namespace dotnetdoc.Writers.Markdown
 {
-	internal sealed class ImageWriter
-		: IWriter
+	internal sealed class MarkdownImageWriter
+		: IMarkdownWriter
 	{
 		private readonly string _description;
 		private readonly string _relativeImagePath;
 
-		public ImageWriter(string description, string relativeImagePath)
+		public MarkdownImageWriter(string description, string relativeImagePath)
 		{
 			_description = description;
 			_relativeImagePath = relativeImagePath;
 		}
 
-		public void WriteTo(TextWriter textWriter)
+		public void RenderTo(TextWriter textWriter)
 		{
 			textWriter.WriteLine("![{0}]({1})", _description, _relativeImagePath);
 		}

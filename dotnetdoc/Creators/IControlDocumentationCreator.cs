@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace dotnetdoc
+namespace dotnetdoc.Creators
 {
 	/// <summary>
 	///     Responsible for creating the documentation for a particular <see cref="FrameworkElement" />.

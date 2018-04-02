@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
 
-namespace dotnetdoc
+namespace dotnetdoc.Creators
 {
 	/// <summary>
 	///     Responsible for creating example code to show how a particular <see cref="FrameworkElement"/> is to be used.
 	/// </summary>
 	public interface IFrameworkElementExampleCreator
-		: IDisposable
+		: ITypeExampleCreator
 	{
 		/// <summary>
 		///     Set a property to the given value.

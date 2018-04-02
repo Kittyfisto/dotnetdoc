@@ -11,7 +11,7 @@ namespace dotnetdoc
 	///     Responsible for reading the documentation of a .NET assembly (which resides in a similarly named xml file,
 	///     usually).
 	/// </summary>
-	public sealed class AssemblyDocumentationReader
+	public sealed class AssemblyDocumentationReader : IAssemblyDocumentationReader
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -32,6 +32,7 @@ namespace dotnetdoc
 			var assemblyFileName = Path.GetFileNameWithoutExtension(_assemblyFilePath);
 			_assemblyDocumentationFilePath =
 				Path.Combine(Path.GetDirectoryName(_assemblyFilePath), string.Format("{0}.xml", assemblyFileName));
+
 			_document = XDocument.Load(_assemblyDocumentationFilePath);
 
 			_typeDocumenstationsByType = new Dictionary<Type, TypeDocumentation>();
