@@ -14,12 +14,6 @@ namespace dotnetdoc
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="func"></param>
-		void Add(Expression<Func<AssemblyDocumentationCreator>> func);
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="method"></param>
 		void AddFromMethod(MethodInfo method);
 
@@ -34,8 +28,13 @@ namespace dotnetdoc
 	/// 
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface ICodeSnippetCreator<out T>
+	public interface ICodeSnippetCreator<T>
 		: ICodeSnippetCreator
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="func"></param>
+		void Add(Expression<Func<T>> func);
 	}
 }

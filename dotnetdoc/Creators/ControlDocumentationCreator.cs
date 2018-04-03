@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using dotnetdoc.Writers;
+using log4net;
 
 namespace dotnetdoc.Creators
 {
@@ -18,6 +20,8 @@ namespace dotnetdoc.Creators
 		: IControlDocumentationCreator<T>
 		where T : FrameworkElement, new()
 	{
+		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
 		private const string DocumentationFolderName = "Documentation";
 		private readonly Dispatcher _dispatcher;
 		private readonly List<ITypeExampleCreator> _examples;
@@ -58,6 +62,8 @@ namespace dotnetdoc.Creators
 
 		public void RenderTo(IFilesystem filesystem, string path, ITypeDocumentationWriter writer)
 		{
+			Log.InfoFormat("Rendering '{0}'...", typeof(T).FullName);
+
 			foreach (var example in _examples)
 			{
 				foreach (var pair in _snapshots)

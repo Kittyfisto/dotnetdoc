@@ -33,7 +33,7 @@ namespace dotnetdoc
 	///     Responsible for creating examples on how to use the type <typeparamref name="T" />.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface ITypeExampleCreator<out T>
+	public interface ITypeExampleCreator<T>
 		: ITypeExampleCreator
 	{
 		/// <summary>

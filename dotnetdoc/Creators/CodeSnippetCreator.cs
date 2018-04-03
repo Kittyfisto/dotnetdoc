@@ -20,7 +20,7 @@ namespace dotnetdoc.Creators
 		/// 
 		/// </summary>
 		/// <param name="func"></param>
-		public void Add(Expression<Func<AssemblyDocumentationCreator>> func)
+		public void Add(Expression<Func<T>> func)
 		{
 			_writer.WriteLine(func.ToString());
 		}

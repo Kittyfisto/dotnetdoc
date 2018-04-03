@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AssemblyDocumentationReader.cs" />
     <Compile Include="Creators\CodeSnippetCreator.cs" />
+    <Compile Include="Doc.cs" />
     <Compile Include="EmptyAssemblyDocumentationReader.cs" />
     <Compile Include="IAssemblyDocumentationReader.cs" />
     <Compile Include="ICodeSnippetCreator.cs" />
@@ -88,4 +89,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /Y "$(TargetDir)dotnetdoc.dll" "C:\Users\Simon\Documents\GitHub\Metrolib\packages\dotnetdoc.0.1.0\lib\net45\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

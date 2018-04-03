@@ -29,7 +29,7 @@ namespace dotnetdoc.Creators
 	/// <summary>
 	///     Responsible for creating the documentation for a particular type.
 	/// </summary>
-	public interface ITypeDocumentationCreator<out T>
+	public interface ITypeDocumentationCreator<T>
 		: ITypeDocumentationCreator
 	{
 		/// <summary>

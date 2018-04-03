@@ -7,7 +7,7 @@ namespace dotnetdoc
 	///     Responsible for creating the documentation for a particular <see cref="FrameworkElement" />.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public interface IControlDocumentationCreator<out T>
+	public interface IControlDocumentationCreator<T>
 		: ITypeDocumentationCreator<T>
 		where T : FrameworkElement
 	{
