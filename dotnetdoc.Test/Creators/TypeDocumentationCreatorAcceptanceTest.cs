@@ -41,6 +41,15 @@ namespace dotnetdoc.Test.Creators
 			Render(doc).Should().Be("# EmptyType\r\n\r\n");
 		}
 
+		[Test]
+		public void TestDocumentTypeWithSee()
+		{
+			var doc = new TypeDocumentationCreator<TypeWithSee>();
+			var result = Render(doc);
+			result.Should().Contain("This class is similar to dotnetdoc.TestTypes.EmptyType");
+			result.Should().Contain("Related to System.Double.");
+		}
+
 		private string Render<T>(ITypeDocumentationCreator<T> creator)
 		{
 			var writer = new TypeDocumentationMarkdownWriter(_documentationReader, typeof(T));

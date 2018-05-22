@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System.Diagnostics.Contracts;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace dotnetdoc
 {
@@ -28,7 +31,7 @@ namespace dotnetdoc
 			if (documentation != null)
 			{
 				var summary = documentation.Summary ?? string.Empty;
-				writer.Write(summary);
+				writer.Write(Format(summary));
 				writer.WriteLine();
 				writer.WriteLine();
 			}
@@ -45,11 +48,32 @@ namespace dotnetdoc
 			{
 				foreach (var remark in documentation.Remarks)
 				{
-					writer.Write(remark);
+					writer.Write(Format(remark));
 					writer.WriteLine();
 					writer.WriteLine();
 				}
 			}
+		}
+
+		[Pure]
+		private static string Format(string rawValue)
+		{
+			// TODO: Another (probably better) solution would be to parse this using XDocument
+			//       and then write a simple formatter to print the resulting tree
+
+			// Ideally we would replace <see ... /> with a markup link, but that's not required just yet
+			var regex = new Regex("<see cref=\"([^\"]*)\" />");
+			var result = regex.Replace(rawValue, ReplaceLinks);
+			return result;
+		}
+
+		private static string ReplaceLinks(Match match)
+		{
+			var value = match.Groups[1].Value;
+			if (value.StartsWith("T:"))
+				return value.Substring(2);
+
+			return value;
 		}
 	}
 }

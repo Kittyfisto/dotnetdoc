@@ -16,8 +16,7 @@ namespace dotnetdoc.Test
 		[Test]
 		public void TestParseOneType()
 		{
-			var reader = new AssemblyDocumentationReader(typeof(AssemblyDocumentationReader).Assembly);
-			var doc = reader.GetDocumentationOf<AssemblyDocumentationReader>();
+			var doc = GetDocumentationFor<AssemblyDocumentationReader>();
 			doc.Should().NotBeNull();
 			doc.FullTypeName.Should().Be("dotnetdoc.AssemblyDocumentationReader");
 			doc.Type.Should().Be<AssemblyDocumentationReader>();
@@ -27,11 +26,24 @@ namespace dotnetdoc.Test
 		[Test]
 		public void TestParseWithXmlAttributes()
 		{
-			var reader = new AssemblyDocumentationReader(typeof(TypeWithSee).Assembly);
-			var doc = reader.GetDocumentationOf<TypeWithSee>();
+			var doc = GetDocumentationFor<TypeWithSee>();
 			doc.Summary.Should().Be("This class is similar to <see cref=\"T:dotnetdoc.TestTypes.EmptyType\" />.");
 			doc.Remarks.Should().HaveCount(1);
 			doc.Remarks[0].Should().Be("Related to <see cref=\"T:System.Double\" />.");
+		}
+
+		[Test]
+		public void TestAnEnum()
+		{
+			var doc = GetDocumentationFor<AnEnum>();
+			doc.Summary.Should().Be("Some random enum.");
+		}
+
+		private static TypeDocumentation GetDocumentationFor<T>()
+		{
+			var reader = new AssemblyDocumentationReader(typeof(T).Assembly);
+			var doc = reader.GetDocumentationOf<T>();
+			return doc;
 		}
 	}
 }

@@ -22,7 +22,6 @@ namespace dotnetdoc.Creators
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		private const string DocumentationFolderName = "Documentation";
 		private readonly Dispatcher _dispatcher;
 		private readonly List<ITypeExampleCreator> _examples;
 		private readonly ResourceDictionary _resourceDictionary;
