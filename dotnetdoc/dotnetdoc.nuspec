@@ -18,8 +18,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\dotnetdoc.XML" target="lib\net45\" />
-    <file src="..\bin\Release\dotnetdoc.pdb" target="lib\net45\" />
-    <file src="..\bin\Release\dotnetdoc.dll" target="lib\net45\" />
+    <file src="bin\Release\dotnetdoc.XML" target="lib\net45\" />
+    <file src="bin\Release\dotnetdoc.pdb" target="lib\net45\" />
+    <file src="bin\Release\dotnetdoc.dll" target="lib\net45\" />
   </files>
 </package>
