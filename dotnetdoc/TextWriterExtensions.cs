@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -72,6 +73,15 @@ namespace dotnetdoc
 			var value = match.Groups[1].Value;
 			if (value.StartsWith("T:"))
 				return value.Substring(2);
+
+			if (value.StartsWith("P:") || value.StartsWith("F:"))
+			{
+				var idx = value.LastIndexOf(".", StringComparison.InvariantCulture);
+				if (idx != -1)
+					return value.Substring(idx + 1);
+
+				return value.Substring(2);
+			}
 
 			return value;
 		}

@@ -50,6 +50,22 @@ namespace dotnetdoc.Test.Creators
 			result.Should().Contain("Related to System.Double.");
 		}
 
+		[Test]
+		public void TestPropertyLink()
+		{
+			var doc = new TypeDocumentationCreator<TypeWithPropertyLinks>();
+			var result = Render(doc);
+			result.Should().Contain("I have a property SomeProperty.");
+		}
+
+		[Test]
+		public void TestFieldLink()
+		{
+			var doc = new TypeDocumentationCreator<TypeWithFieldLinks>();
+			var result = Render(doc);
+			result.Should().Contain("I have a property SomeField.");
+		}
+
 		private string Render<T>(ITypeDocumentationCreator<T> creator)
 		{
 			var writer = new TypeDocumentationMarkdownWriter(_documentationReader, typeof(T));
