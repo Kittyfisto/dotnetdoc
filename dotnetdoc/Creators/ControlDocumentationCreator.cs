@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -65,17 +66,17 @@ namespace dotnetdoc.Creators
 
 			foreach (var example in _examples)
 			{
-				foreach (var pair in _snapshots)
-				{
-					var relativeImagePath = pair.Key;
-					var bitmap = pair.Value;
-
-					var destination = Path.Combine(path, relativeImagePath);
-					SaveSnapshot(bitmap, destination);
-				}
-
 				var exampleWriter = writer.AddExample(example.Name);
 				example.RenderTo(exampleWriter);
+			}
+
+			foreach (var pair in _snapshots)
+			{
+				var relativeImagePath = pair.Key;
+				var bitmap = pair.Value;
+
+				var destination = Path.Combine(path, relativeImagePath);
+				SaveSnapshotAsync(filesystem, bitmap, destination).Wait();
 			}
 		}
 
@@ -110,7 +111,7 @@ namespace dotnetdoc.Creators
 			return builder.ToString();
 		}
 
-		private static void SaveSnapshot(BitmapSource screenshot, string destination)
+		private static async Task SaveSnapshotAsync(IFilesystem filesystem, BitmapSource screenshot, string destination)
 		{
 			var encoder = new PngBitmapEncoder();
 			using (var stream = new MemoryStream())
@@ -122,8 +123,8 @@ namespace dotnetdoc.Creators
 				stream.Position = 0;
 
 				var destinationDirectory = Path.GetDirectoryName(destination);
-				Directory.CreateDirectory(destinationDirectory);
-				using (var fileStream = File.OpenWrite(destination))
+				await filesystem.CreateDirectory(destinationDirectory);
+				using (var fileStream = await filesystem.OpenWrite(destination))
 				{
 					stream.CopyTo(fileStream);
 				}
