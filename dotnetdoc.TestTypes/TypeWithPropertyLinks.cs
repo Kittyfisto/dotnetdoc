@@ -5,6 +5,14 @@
 	/// </summary>
 	public class TypeWithPropertyLinks
 	{
+		/// <summary>
+		/// I'm related to <see cref="AnotherProperty"/>.
+		/// </summary>
 		public string SomeProperty { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int AnotherProperty { get; set; }
 	}
 }

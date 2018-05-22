@@ -52,7 +52,7 @@ namespace dotnetdoc.Writers.Markdown
 				foreach (var property in _typeDocumentation.Properties)
 				{
 					textWriter.WriteLine("**{0}**: {1}  ", property.PropertyName, property.PropertyType);
-					textWriter.WriteLine(property.Summary);
+					textWriter.WriteLine(TextWriterExtensions.Format(property.Summary));
 					textWriter.WriteLine();
 				}
 			}

@@ -51,11 +51,19 @@ namespace dotnetdoc.Test.Creators
 		}
 
 		[Test]
-		public void TestPropertyLink()
+		public void TestPropertyLink1()
 		{
 			var doc = new TypeDocumentationCreator<TypeWithPropertyLinks>();
 			var result = Render(doc);
 			result.Should().Contain("I have a property SomeProperty.");
+		}
+
+		[Test]
+		public void TestPropertyLink2()
+		{
+			var doc = new TypeDocumentationCreator<TypeWithPropertyLinks>();
+			var result = Render(doc);
+			result.Should().Contain("I'm related to AnotherProperty.");
 		}
 
 		[Test]

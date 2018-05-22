@@ -56,8 +56,13 @@ namespace dotnetdoc
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rawValue"></param>
+		/// <returns></returns>
 		[Pure]
-		private static string Format(string rawValue)
+		public static string Format(string rawValue)
 		{
 			// TODO: Another (probably better) solution would be to parse this using XDocument
 			//       and then write a simple formatter to print the resulting tree
