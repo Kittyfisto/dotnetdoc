@@ -44,7 +44,7 @@ namespace dotnetdoc
 		protected static string GetSummary(XElement member)
 		{
 			var summary = member.Descendants("summary").FirstOrDefault();
-			return summary?.Value.Trim();
+			return GetRawValue(summary);
 		}
 
 		/// <summary>
@@ -57,8 +57,19 @@ namespace dotnetdoc
 		{
 			var remarks = member.Descendants("remarks");
 			var allRemarks = new List<string>();
-			foreach (var remark in remarks) allRemarks.Add(remark.Value.Trim());
+			foreach (var remark in remarks) allRemarks.Add(GetRawValue(remark));
 			return allRemarks;
+		}
+
+		[Pure]
+		private static string GetRawValue(XElement element)
+		{
+			if (element == null)
+				return null;
+
+			var rawText = string.Concat(element.Nodes());
+			var cleaned = rawText.Trim();
+			return cleaned;
 		}
 	}
 }

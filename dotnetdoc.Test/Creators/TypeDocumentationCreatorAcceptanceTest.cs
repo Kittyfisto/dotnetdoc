@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using dotnetdoc.Creators;
-using dotnetdoc.Test.TestTypes;
+using dotnetdoc.TestTypes;
 using dotnetdoc.Writers.Markdown;
 using FluentAssertions;
 using NUnit.Framework;

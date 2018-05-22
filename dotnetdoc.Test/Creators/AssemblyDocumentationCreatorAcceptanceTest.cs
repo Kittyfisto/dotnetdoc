@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using dotnetdoc.Creators;
-using dotnetdoc.Test.TestTypes;
+using dotnetdoc.TestTypes;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -53,7 +53,7 @@ namespace dotnetdoc.Test.Creators
 
 		private void Render()
 		{
-			_assemblyDocumentationCreator.RenderTo(_filesystem, "");
+			_assemblyDocumentationCreator.RenderTo(_filesystem, ".");
 		}
 	}
 }

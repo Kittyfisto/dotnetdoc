@@ -1,4 +1,4 @@
-﻿namespace dotnetdoc.Test.TestTypes
+﻿namespace dotnetdoc.TestTypes
 {
 	public sealed class EmptyType
 	{
