@@ -2,6 +2,7 @@
 using System.Threading;
 using dotnetdoc.Creators;
 using dotnetdoc.TestTypes;
+using dotnetdoc.TestTypes.SomeFolder;
 using dotnetdoc.Writers.Markdown;
 using FluentAssertions;
 using NUnit.Framework;
@@ -38,7 +39,7 @@ namespace dotnetdoc.Test.Creators
 		public void TestDocumentEmptyType()
 		{
 			var doc = new TypeDocumentationCreator<EmptyType>();
-			Render(doc).Should().Be("# EmptyType\r\n\r\n");
+			Render(doc).Should().Contain("EmptyType");
 		}
 
 		[Test]
@@ -72,6 +73,25 @@ namespace dotnetdoc.Test.Creators
 			var doc = new TypeDocumentationCreator<TypeWithFieldLinks>();
 			var result = Render(doc);
 			result.Should().Contain("I have a property SomeField.");
+		}
+
+		[Test]
+		public void TestNamespace()
+		{
+			var doc = new TypeDocumentationCreator<SomeType>();
+			var result = Render(doc);
+			result.Should().Contain("Namespace");
+			result.Should().Contain("dotnetdoc.TestTypes.SomeFolder");
+		}
+
+		[Test]
+		public void TestAssembly()
+		{
+			var doc = new TypeDocumentationCreator<SomeType>();
+			var result = Render(doc);
+			result.Should().Contain("Assembly");
+			result.Should().Contain("dotnetdoc.TestTypes");
+			result.Should().Contain("dotnetdoc.TestTypes.dll");
 		}
 
 		private string Render<T>(ITypeDocumentationCreator<T> creator)

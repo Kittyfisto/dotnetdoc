@@ -18,7 +18,7 @@ namespace dotnetdoc
 		/// <param name="name"></param>
 		public static void WriteHeader(this TextWriter writer, string name)
 		{
-			writer.WriteLine("# {0}", name);
+			writer.WriteLine("# {0}  ", name);
 			writer.WriteLine();
 		}
 
