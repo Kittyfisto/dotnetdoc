@@ -105,7 +105,8 @@ namespace dotnetdoc.Creators
 				'/',
 				'\\',
 				'\r',
-				'\n'
+				'\n',
+				'%'
 			};
 			foreach (var invalidCharacter in invalidChars) builder.Replace(invalidCharacter, '_');
 			return builder.ToString();

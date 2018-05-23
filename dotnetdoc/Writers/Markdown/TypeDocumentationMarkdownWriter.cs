@@ -40,8 +40,8 @@ namespace dotnetdoc.Writers.Markdown
 			textWriter.WriteHeader(_type.Name);
 			textWriter.WriteSummary(_typeDocumentation);
 			textWriter.WriteRemarks(_typeDocumentation);
-			textWriter.WriteLine("Namespace: {0}  ", _type.Namespace);
-			textWriter.WriteLine("Assembly: {0} (in {0}.dll)  ", _type.Assembly.GetName().Name);
+			textWriter.WriteLine("**Namespace**: {0}  ", _type.Namespace);
+			textWriter.WriteLine("**Assembly**: {0} (in {0}.dll)  ", _type.Assembly.GetName().Name);
 			textWriter.WriteLine();
 
 			foreach (var subWriter in _subWriters)

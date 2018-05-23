@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using dotnetdoc.Creators;
 using dotnetdoc.WpfLibrary;
 using FluentAssertions;
 using NUnit.Framework;
@@ -43,6 +45,14 @@ namespace dotnetdoc.Test.Creators
 			screenshots[0].Should().EndWith("Stuff.png");
 		}
 
+		[Test]
+		public void TestAddImage()
+		{
+			var creator = Create<SomeButton>();
+			var name = creator.AddImage(new BitmapImage(), "40%");
+			name.Should().NotContain("%", "because special characters should've been stripped from the actual filename");
+		}
+
 		private IReadOnlyList<string> GetScreenshots()
 		{
 			return _filesystem.EnumerateFiles(RootDirectory, "*.png", SearchOption.AllDirectories).Result;
@@ -53,9 +63,9 @@ namespace dotnetdoc.Test.Creators
 			_doc.RenderTo(_filesystem, RootDirectory);
 		}
 
-		private IControlDocumentationCreator<T> Create<T>() where T : FrameworkElement, new()
+		private ControlDocumentationCreator<T> Create<T>() where T : FrameworkElement, new()
 		{
-			return _doc.CreateDocumentationForFrameworkElement<T>();
+			return (ControlDocumentationCreator<T>) _doc.CreateDocumentationForFrameworkElement<T>();
 		}
 	}
 }
