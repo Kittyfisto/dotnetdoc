@@ -1,34 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using dotnetdoc.Creators;
 using dotnetdoc.WpfLibrary;
+using dotnetdoc.Writers.Markdown;
 using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 
 namespace dotnetdoc.Test.Creators
 {
 	[TestFixture]
+	[RequiresThread(ApartmentState.STA)]
 	public sealed class ControlDocumentationCreatorTest
 	{
 		private const string RootDirectory = @"M:\documentation";
 
-		private Doc _doc;
 		private InMemoryFilesystem _filesystem;
 
 		[SetUp]
 		public void Setup()
 		{
 			_filesystem = new InMemoryFilesystem();
-			_doc = new Doc(typeof(SomeButton).Assembly, "/dotnetdoc.WpfLibrary;component/Themes/Generic.xaml");
-		}
-
-		[TearDown]
-		public void Teardown()
-		{
-			_doc.Dispose();
 		}
 
 		[Test]
@@ -38,7 +33,7 @@ namespace dotnetdoc.Test.Creators
 			var example = creator.AddExample("Stuff");
 			example.Resize(32, 32);
 
-			Render();
+			Render(creator);
 
 			var screenshots = GetScreenshots();
 			screenshots.Should().HaveCount(1, "because one screenshot should've been created");
@@ -58,14 +53,19 @@ namespace dotnetdoc.Test.Creators
 			return _filesystem.EnumerateFiles(RootDirectory, "*.png", SearchOption.AllDirectories).Result;
 		}
 
-		private void Render()
+		private void Render<T>(ControlDocumentationCreator<T> creator) where T : FrameworkElement, new()
 		{
-			_doc.RenderTo(_filesystem, RootDirectory);
+			var reader = new Mock<IAssemblyDocumentationReader>();
+			var writer = new TypeDocumentationMarkdownWriter(reader.Object, typeof(T));
+			creator.RenderTo(_filesystem, RootDirectory, writer);
 		}
 
 		private ControlDocumentationCreator<T> Create<T>() where T : FrameworkElement, new()
 		{
-			return (ControlDocumentationCreator<T>) _doc.CreateDocumentationForFrameworkElement<T>();
+			var dispatcher = new DispatcherMock();
+			var resourceDictionary = new ResourceDictionary();
+			return new ControlDocumentationCreator<T>(dispatcher,
+			                                          resourceDictionary);
 		}
 	}
 }

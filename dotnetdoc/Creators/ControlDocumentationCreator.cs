@@ -23,12 +23,12 @@ namespace dotnetdoc.Creators
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		private readonly Dispatcher _dispatcher;
+		private readonly IDispatcher _dispatcher;
 		private readonly List<ITypeExampleCreator> _examples;
 		private readonly ResourceDictionary _resourceDictionary;
 		private readonly Dictionary<string, BitmapSource> _snapshots;
 
-		public ControlDocumentationCreator(Dispatcher dispatcher,
+		public ControlDocumentationCreator(IDispatcher dispatcher,
 			ResourceDictionary resourceDictionary)
 		{
 			if (dispatcher == null)
@@ -48,7 +48,7 @@ namespace dotnetdoc.Creators
 			if (name == null)
 				throw new ArgumentNullException(nameof(name));
 
-			var exampleCreator = new FrameworkElementExampleCreator<T>(this, new DispatcherProxy(_dispatcher), _resourceDictionary, name);
+			var exampleCreator = new FrameworkElementExampleCreator<T>(this, _dispatcher, _resourceDictionary, name);
 			_examples.Add(exampleCreator);
 			return exampleCreator;
 		}

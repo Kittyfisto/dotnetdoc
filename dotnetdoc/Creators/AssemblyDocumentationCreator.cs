@@ -64,7 +64,7 @@ namespace dotnetdoc.Creators
 
 		public IControlDocumentationCreator<T> CreateDocumentationForFrameworkElement<T>() where T : FrameworkElement, new()
 		{
-			var creator = new ControlDocumentationCreator<T>(_dispatcher, _resourceDictionary);
+			var creator = new ControlDocumentationCreator<T>(new DispatcherProxy(_dispatcher), _resourceDictionary);
 			_types.Add(creator);
 			return creator;
 		}
