@@ -27,6 +27,16 @@ namespace dotnetdoc
 		void Focus();
 
 		/// <summary>
+		/// 
+		/// </summary>
+		void Press();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void Hover();
+
+		/// <summary>
 		/// </summary>
 		/// <param name="timeout"></param>
 		void Wait(TimeSpan timeout);

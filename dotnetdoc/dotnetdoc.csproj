@@ -53,6 +53,9 @@
   <ItemGroup>
     <Compile Include="AssemblyDocumentationReader.cs" />
     <Compile Include="Creators\CodeSnippetCreator.cs" />
+    <Compile Include="DispatcherProxy.cs" />
+    <Compile Include="IDispatcher.cs" />
+    <Compile Include="Creators\IInternalControlDocumentationCreator.cs" />
     <Compile Include="Doc.cs" />
     <Compile Include="EmptyAssemblyDocumentationReader.cs" />
     <Compile Include="IAssemblyDocumentationReader.cs" />

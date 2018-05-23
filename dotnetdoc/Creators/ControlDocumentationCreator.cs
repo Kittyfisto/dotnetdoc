@@ -18,7 +18,7 @@ namespace dotnetdoc.Creators
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	internal sealed class ControlDocumentationCreator<T>
-		: IControlDocumentationCreator<T>
+		: IInternalControlDocumentationCreator<T>
 		where T : FrameworkElement, new()
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -48,7 +48,7 @@ namespace dotnetdoc.Creators
 			if (name == null)
 				throw new ArgumentNullException(nameof(name));
 
-			var exampleCreator = new FrameworkElementExampleCreator<T>(this, _dispatcher, _resourceDictionary, name);
+			var exampleCreator = new FrameworkElementExampleCreator<T>(this, new DispatcherProxy(_dispatcher), _resourceDictionary, name);
 			_examples.Add(exampleCreator);
 			return exampleCreator;
 		}
@@ -80,7 +80,7 @@ namespace dotnetdoc.Creators
 			}
 		}
 
-		internal string AddImage(BitmapSource screenshot, string name)
+		public string AddImage(BitmapSource screenshot, string name)
 		{
 			var actualName = CoerceImageName(name);
 
