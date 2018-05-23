@@ -119,6 +119,12 @@ namespace dotnetdoc.Creators
 			if (!(value is IConvertible))
 				return value;
 
+			if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
+			    value.GetType() == targetType.GetGenericArguments()[0])
+			{
+				return value;
+			}
+
 			return Convert.ChangeType(value, targetType);
 		}
 

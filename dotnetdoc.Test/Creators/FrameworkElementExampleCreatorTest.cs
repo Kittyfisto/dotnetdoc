@@ -48,6 +48,15 @@ namespace dotnetdoc.Test.Creators
 			creator.Element.Value.Should().Be(50);
 		}
 
+		[Test]
+		public void TestSetValueNullableBoolean([Values(true, false, null)] bool? value)
+		{
+			var creator = Create<ToggleButton>();
+			creator.Element.IsChecked.Should().BeFalse();
+			creator.SetValue(ToggleButton.IsCheckedProperty, value);
+			creator.Element.IsChecked.Should().Be(value);
+		}
+
 		private static FrameworkElementExampleCreator<T> Create<T>() where T : FrameworkElement, new()
 		{
 			var controlCreator = new Mock<IInternalControlDocumentationCreator<T>>();
