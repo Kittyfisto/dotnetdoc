@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 
 namespace dotnetdoc.Writers.Markdown
@@ -44,6 +45,12 @@ namespace dotnetdoc.Writers.Markdown
 			textWriter.WriteLine("**Assembly**: {0} (in {0}.dll)  ", _type.Assembly.GetName().Name);
 			textWriter.WriteLine();
 
+			CreateTypeDefinition(_type).WriteTo(textWriter);
+
+			textWriter.WriteLine();
+
+			textWriter.WriteLine("Inheritance {0}", string.Join(" -> ", GetInheritance(_type)));
+
 			foreach (var subWriter in _subWriters)
 			{
 				subWriter.WriteTo(textWriter);
@@ -59,6 +66,61 @@ namespace dotnetdoc.Writers.Markdown
 					textWriter.WriteLine();
 				}
 			}
+		}
+
+		[Pure]
+		private static CodeSnippetMarkdownWriter CreateTypeDefinition(Type type)
+		{
+			var typeDefinitionWriter = new CodeSnippetMarkdownWriter("C#");
+			var attributes = type.GetCustomAttributes(false);
+
+			foreach (var attribute in attributes)
+			{
+				var attributeType = attribute.GetType();
+				var attributeName = attributeType.FullName;
+				if (attributeName.EndsWith("Attribute"))
+					attributeName = attributeName.Substring(0, attributeName.Length - 9);
+				typeDefinitionWriter.WriteLine("[{0}]", attributeName);
+			}
+
+			if (type.IsPublic)
+				typeDefinitionWriter.Write("public ");
+
+			if (type.IsSealed && !type.IsEnum)
+				typeDefinitionWriter.Write("sealed ");
+			else if (type.IsAbstract)
+				typeDefinitionWriter.Write("abstract ");
+
+			if (type.IsClass)
+				typeDefinitionWriter.Write("class ");
+			else if (type.IsEnum)
+				typeDefinitionWriter.Write("enum ");
+			else
+				typeDefinitionWriter.Write("struct ");
+
+			typeDefinitionWriter.Write("{0} ", type.Name);
+
+			var @base = type.BaseType;
+			if (type != typeof(Object))
+				typeDefinitionWriter.Write(": {0}", @base);
+			return typeDefinitionWriter;
+		}
+
+		[Pure]
+		private static IEnumerable<string> GetInheritance(Type type)
+		{
+			var inheritance = new List<string>();
+			while (type != typeof(Object) && type != null)
+			{
+				inheritance.Add(type.Name);
+				type = type.BaseType;
+			}
+
+			if (type != null)
+				inheritance.Add(type.Name);
+
+			inheritance.Reverse();
+			return inheritance;
 		}
 	}
 }

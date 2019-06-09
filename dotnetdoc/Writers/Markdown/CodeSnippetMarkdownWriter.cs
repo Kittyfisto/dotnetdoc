@@ -17,7 +17,7 @@ namespace dotnetdoc.Writers.Markdown
 		public void WriteTo(TextWriter writer)
 		{
 			writer.WriteLine("```{0}", _language);
-			writer.Write(ToString());
+			writer.WriteLine(ToString());
 			writer.WriteLine("```");
 		}
 	}

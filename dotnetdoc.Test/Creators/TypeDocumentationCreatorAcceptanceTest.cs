@@ -94,6 +94,62 @@ namespace dotnetdoc.Test.Creators
 			result.Should().Contain("dotnetdoc.TestTypes.dll");
 		}
 
+		[Test]
+		public void TestEnum()
+		{
+			var doc = new TypeDocumentationCreator<AnEnum>();
+			var result = Render(doc);
+			result.Should().Contain("public enum AnEnum : System.Enum");
+		}
+
+		[Test]
+		public void TestPublicAbstractType()
+		{
+			var doc = new TypeDocumentationCreator<PublicAbstractType>();
+			var result = Render(doc);
+			result.Should().Contain("public abstract class PublicAbstractType : System.Object");
+		}
+
+		[Test]
+		public void TestPublicSealedType()
+		{
+			var doc = new TypeDocumentationCreator<PublicSealedType>();
+			var result = Render(doc);
+			result.Should().Contain("public sealed class PublicSealedType : System.Object");
+		}
+
+		[Test]
+		public void TestPublicType()
+		{
+			var doc = new TypeDocumentationCreator<PublicType>();
+			var result = Render(doc);
+			result.Should().Contain("public class PublicType : System.Object");
+		}
+
+		[Test]
+		public void TestTypeWithSerializableAttribute()
+		{
+			var doc = new TypeDocumentationCreator<TypeWithSerializableAttribute>();
+			var result = Render(doc);
+			result.Should().Contain("[System.Serializable]");
+		}
+
+		[Test]
+		public void TestInheritingType()
+		{
+			var doc = new TypeDocumentationCreator<InheritingType>();
+			var result = Render(doc);
+			result.Should().Contain("Inheritance Object -> PublicAbstractType -> InheritingType");
+		}
+
+		[Test]
+		public void TestObject()
+		{
+			var doc = new TypeDocumentationCreator<object>();
+			var result = Render(doc);
+			result.Should().Contain("Inheritance Object\r\n");
+		}
+
 		private string Render<T>(ITypeDocumentationCreator<T> creator)
 		{
 			var writer = new TypeDocumentationMarkdownWriter(_documentationReader, typeof(T));

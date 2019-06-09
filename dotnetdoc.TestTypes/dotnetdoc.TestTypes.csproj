@@ -44,11 +44,16 @@
   <ItemGroup>
     <Compile Include="AnEnum.cs" />
     <Compile Include="EmptyType.cs" />
+    <Compile Include="InheritingType.cs" />
+    <Compile Include="PublicSealedType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicAbstractType.cs" />
+    <Compile Include="PublicType.cs" />
     <Compile Include="SomeFolder\SomeType.cs" />
     <Compile Include="TypeWithFieldLinks.cs" />
     <Compile Include="TypeWithPropertyLinks.cs" />
     <Compile Include="TypeWithSee.cs" />
+    <Compile Include="TypeWithSerializableAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
