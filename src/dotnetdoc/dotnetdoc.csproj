@@ -3,7 +3,6 @@
     <TargetFrameworks>net45;net5-windows</TargetFrameworks>
     <AssemblyName>dotnetdoc</AssemblyName>
     <RootNamespace>dotnetdoc</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<UseWPF>true</UseWPF>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<Authors>Simon Mießler</Authors>

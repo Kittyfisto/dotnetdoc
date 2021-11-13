@@ -3,7 +3,6 @@
     <TargetFrameworks>net45;net5-windows</TargetFrameworks>
     <AssemblyName>dotnetdoc.WpfLibrary</AssemblyName>
     <RootNamespace>dotnetdoc.WpfLibrary</RootNamespace>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 	<UseWPF>true</UseWPF>
 	<Version>0.3.0.65</Version>
 	<AssemblyVersion>0.3.0.65</AssemblyVersion>
