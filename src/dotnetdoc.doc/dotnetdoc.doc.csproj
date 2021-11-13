@@ -1,31 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net45;net5-windows</TargetFrameworks>
-    <AssemblyName>dotnetdoc.doc</AssemblyName>
-    <RootNamespace>dotnetdoc.doc</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<UseWPF>true</UseWPF>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	 <OutputType>Exe</OutputType>
-	<Version>0.3.0.65</Version>
-	<AssemblyVersion>0.3.0.65</AssemblyVersion>
-    <FileVersion>0.3.0.65</FileVersion>
-    <ApplicationIcon />
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>..\..\bin\Release\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.13" />
-    <PackageReference Include="System.Threading.Extensions" Version="2.0.105" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dotnetdoc\dotnetdoc.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net45;net5-windows</TargetFrameworks>
+		<AssemblyName>dotnetdoc.doc</AssemblyName>
+		<RootNamespace>dotnetdoc.doc</RootNamespace>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<UseWPF>true</UseWPF>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<OutputType>Exe</OutputType>
+		<IsPackable>false</IsPackable>
+		<Version>0.3.0.65</Version>
+		<AssemblyVersion>0.3.0.65</AssemblyVersion>
+		<FileVersion>0.3.0.65</FileVersion>
+		<ApplicationIcon />
+		<StartupObject />
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\bin\Release\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputPath>..\..\bin\Debug\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.13" />
+		<PackageReference Include="System.Threading.Extensions" Version="2.0.105" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\dotnetdoc\dotnetdoc.csproj" />
+	</ItemGroup>
 </Project>
