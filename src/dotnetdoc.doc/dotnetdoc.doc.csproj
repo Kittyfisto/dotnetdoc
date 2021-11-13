@@ -8,6 +8,7 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	 <OutputType>Exe</OutputType>
 	<Authors>Simon Mießler</Authors>
+	<PackageId>dotnetdoc</PackageId>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageProjectUrl>https://github.com/Kittyfisto/dotnetdoc</PackageProjectUrl>
 	<PackageTags>.NET WPF Metro</PackageTags>
