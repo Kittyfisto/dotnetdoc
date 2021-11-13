@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc", "dotnetdoc\dotnetdoc.csproj", "{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc", "src\dotnetdoc\dotnetdoc.csproj", "{106CC1B5-6A57-4076-8BBF-1CA5661BEBFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.Test", "dotnetdoc.Test\dotnetdoc.Test.csproj", "{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.Test", "src\dotnetdoc.Test\dotnetdoc.Test.csproj", "{C6884B8D-F4BF-4E34-9D8C-1679D3AAD412}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.doc", "dotnetdoc.doc\dotnetdoc.doc.csproj", "{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.doc", "src\dotnetdoc.doc\dotnetdoc.doc.csproj", "{51A1E1E1-FA6B-4F7F-935B-A040F3A72EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.TestTypes", "dotnetdoc.TestTypes\dotnetdoc.TestTypes.csproj", "{40E49336-7330-41C3-9DC0-F33B52560EDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.TestTypes", "src\dotnetdoc.TestTypes\dotnetdoc.TestTypes.csproj", "{40E49336-7330-41C3-9DC0-F33B52560EDB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90CAB79F-B0F4-43E5-B116-5E2401A78FF7}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.WpfLibrary", "dotnetdoc.WpfLibrary\dotnetdoc.WpfLibrary.csproj", "{E3C4A9F5-CBC0-4E86-8B7C-31E8E5195A5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetdoc.WpfLibrary", "src\dotnetdoc.WpfLibrary\dotnetdoc.WpfLibrary.csproj", "{E3C4A9F5-CBC0-4E86-8B7C-31E8E5195A5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

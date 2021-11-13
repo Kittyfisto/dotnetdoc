@@ -76,7 +76,7 @@ namespace dotnetdoc.Creators
 				var bitmap = pair.Value;
 
 				var destination = Path.Combine(path, relativeImagePath);
-				SaveSnapshotAsync(filesystem, bitmap, destination).Wait();
+				SaveSnapshotAsync(filesystem, bitmap, destination);
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace dotnetdoc.Creators
 			return builder.ToString();
 		}
 
-		private static async Task SaveSnapshotAsync(IFilesystem filesystem, BitmapSource screenshot, string destination)
+		private static void SaveSnapshotAsync(IFilesystem filesystem, BitmapSource screenshot, string destination)
 		{
 			var encoder = new PngBitmapEncoder();
 			using (var stream = new MemoryStream())
@@ -124,8 +124,8 @@ namespace dotnetdoc.Creators
 				stream.Position = 0;
 
 				var destinationDirectory = Path.GetDirectoryName(destination);
-				await filesystem.CreateDirectory(destinationDirectory);
-				using (var fileStream = await filesystem.OpenWrite(destination))
+				filesystem.CreateDirectory(destinationDirectory);
+				using (var fileStream = filesystem.OpenWrite(destination))
 				{
 					stream.CopyTo(fileStream);
 				}

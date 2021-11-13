@@ -13,7 +13,6 @@ namespace dotnetdoc.Test.Creators
 	public sealed class AssemblyDocumentationCreatorAcceptanceTest
 	{
 		private InMemoryFilesystem _filesystem;
-		private ImmediateTaskScheduler _scheduler;
 		private AssemblyDocumentationReader _documentationReader;
 		private AssemblyDocumentationCreator _assemblyDocumentationCreator;
 
@@ -26,16 +25,13 @@ namespace dotnetdoc.Test.Creators
 		[SetUp]
 		public void Setup()
 		{
-			_scheduler = new ImmediateTaskScheduler();
-			_filesystem = new InMemoryFilesystem(_scheduler);
+			_filesystem = new InMemoryFilesystem();
 			_assemblyDocumentationCreator = new AssemblyDocumentationCreator(typeof(EmptyType).Assembly);
 		}
 
 		[TearDown]
 		public void TearDown()
-		{
-			_scheduler.Dispose();
-		}
+		{}
 
 		[Test]
 		[Ignore("Not yet fully implemented")]
@@ -49,7 +45,7 @@ namespace dotnetdoc.Test.Creators
 		[Pure]
 		private string GetIndex()
 		{
-			return Encoding.UTF8.GetString(_filesystem.ReadAllBytes("Documentation/README.md").Result);
+			return Encoding.UTF8.GetString(_filesystem.ReadAllBytes("Documentation/README.md"));
 		}
 
 		private void Render()

@@ -74,8 +74,6 @@ namespace dotnetdoc.Creators
 			var path = Path.GetFullPath(basePath);
 			Log.InfoFormat("Rendering documentation to '{0}'...", path);
 
-			var tasks = new List<Task>();
-
 			foreach (var typeCreator in _types)
 			{
 				var documentationWriter = new TypeDocumentationMarkdownWriter(_assemblyDocumentationReader, typeCreator.Type);
@@ -92,20 +90,18 @@ namespace dotnetdoc.Creators
 				streamWriter.Flush();
 
 				stream.Position = 0;
-				tasks.Add(WriteDocumentationTo(filesystem, fileName, stream));
-			}
-
-			Task.WaitAll(tasks.ToArray());
+                WriteDocumentationTo(filesystem, fileName, stream);
+            }
 
 			Log.InfoFormat("Rendering documentation finished!");
 		}
 
-		private static async Task WriteDocumentationTo(IFilesystem filesystem, string fileName,
+		private static void WriteDocumentationTo(IFilesystem filesystem, string fileName,
 			Stream serializedDocumentation)
 		{
 			Log.InfoFormat("Writing '{0}'...", fileName);
 
-			using (var fileStream = await filesystem.CreateFile(fileName))
+			using (var fileStream = filesystem.CreateFile(fileName))
 			{
 				serializedDocumentation.CopyTo(fileStream);
 			}
