@@ -30,10 +30,7 @@ namespace dotnetdoc
 		{
 			_assembly = assembly;
 
-			var codeBase = assembly.CodeBase;
-			var uri = new UriBuilder(codeBase);
-			_assemblyFilePath = Uri.UnescapeDataString(uri.Path);
-			var assemblyFileName = Path.GetFileNameWithoutExtension(_assemblyFilePath);
+			var assemblyFileName = Path.GetFileNameWithoutExtension(assembly.Location);
 			_assemblyDocumentationFilePath =
 				Path.Combine(Path.GetDirectoryName(_assemblyFilePath), string.Format("{0}.xml", assemblyFileName));
 

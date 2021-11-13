@@ -108,7 +108,7 @@ namespace dotnetdoc
 		/// <param name="basePath"></param>
 		public void RenderTo(string basePath)
 		{
-			using (var scheduler = new SerialTaskScheduler())
+			using (var scheduler = new DefaultTaskScheduler())
 			{
 				var filesystem = new Filesystem(scheduler);
 				RenderTo(filesystem, basePath);

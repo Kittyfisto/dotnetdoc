@@ -50,7 +50,7 @@ namespace dotnetdoc.Test.Creators
 
 		private IReadOnlyList<string> GetScreenshots()
 		{
-			return _filesystem.EnumerateFiles(RootDirectory, "*.png", SearchOption.AllDirectories).Result;
+			return _filesystem.EnumerateFiles(RootDirectory, "*.png", SearchOption.AllDirectories);
 		}
 
 		private void Render<T>(ControlDocumentationCreator<T> creator) where T : FrameworkElement, new()

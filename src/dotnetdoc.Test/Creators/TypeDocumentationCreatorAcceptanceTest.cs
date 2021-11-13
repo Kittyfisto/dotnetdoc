@@ -13,7 +13,6 @@ namespace dotnetdoc.Test.Creators
 	public sealed class TypeDocumentationCreatorAcceptanceTest
 	{
 		private InMemoryFilesystem _filesystem;
-		private ImmediateTaskScheduler _scheduler;
 		private AssemblyDocumentationReader _documentationReader;
 
 		[OneTimeSetUp]
@@ -25,15 +24,12 @@ namespace dotnetdoc.Test.Creators
 		[SetUp]
 		public void Setup()
 		{
-			_scheduler = new ImmediateTaskScheduler();
-			_filesystem = new InMemoryFilesystem(_scheduler);
+			_filesystem = new InMemoryFilesystem();
 		}
 
 		[TearDown]
 		public void TearDown()
-		{
-			_scheduler.Dispose();
-		}
+		{}
 
 		[Test]
 		public void TestDocumentEmptyType()
