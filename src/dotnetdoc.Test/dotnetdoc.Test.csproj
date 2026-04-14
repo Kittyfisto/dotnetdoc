@@ -25,6 +25,7 @@
 		<PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
 	</ItemGroup>
 	<ItemGroup>
+  	<PackageReference Include="log4net" Version="3.3.0" />
 		<ProjectReference Include="..\dotnetdoc.TestTypes\dotnetdoc.TestTypes.csproj" />
 		<ProjectReference Include="..\dotnetdoc.WpfLibrary\dotnetdoc.WpfLibrary.csproj" />
 		<ProjectReference Include="..\dotnetdoc\dotnetdoc.csproj" />
